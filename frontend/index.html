@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Krav Maga Technique Coach</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Krav Maga Technique Coach</h1>
+    <p class="subtitle">Record a strike. Get AI coaching feedback.</p>
+  </header>
+
+  <main>
+    <section id="camera-section">
+      <div id="video-container">
+        <video id="camera-preview" autoplay muted playsinline></video>
+        <div id="timer" class="hidden" aria-live="polite">0:00</div>
+      </div>
+
+      <div id="controls">
+        <div id="strike-select-group">
+          <label for="strike-type">Strike type</label>
+          <select id="strike-type">
+            <option value="jab">Jab</option>
+            <option value="cross">Cross</option>
+            <option value="jab_cross">Jab-Cross</option>
+          </select>
+        </div>
+
+        <button id="record-btn" aria-label="Start recording" disabled>
+          <span class="btn-icon record-icon"></span>
+          <span class="btn-label">Record</span>
+        </button>
+      </div>
+
+      <div id="camera-error" class="hidden" role="alert">
+        <p>Camera access denied. Please allow camera permissions and reload.</p>
+      </div>
+    </section>
+
+    <section id="status-section" class="hidden" aria-live="polite">
+      <div id="progress-steps">
+        <div class="step" data-step="extracting">
+          <span class="step-indicator"></span>
+          <span class="step-label">Extracting frames</span>
+        </div>
+        <div class="step" data-step="analyzing">
+          <span class="step-indicator"></span>
+          <span class="step-label">Analyzing technique</span>
+        </div>
+        <div class="step" data-step="generating">
+          <span class="step-indicator"></span>
+          <span class="step-label">Generating feedback</span>
+        </div>
+      </div>
+      <div id="status-message"></div>
+    </section>
+
+    <section id="error-section" class="hidden" role="alert">
+      <p id="error-message"></p>
+      <button id="error-dismiss">Dismiss</button>
+    </section>
+
+    <section id="feedback-section" class="hidden">
+      <h2>Feedback</h2>
+
+      <div id="feedback-summary" class="card"></div>
+
+      <div id="feedback-positives" class="card">
+        <h3>What you're doing well</h3>
+        <ul id="positives-list"></ul>
+      </div>
+
+      <div id="feedback-corrections">
+        <h3>Corrections</h3>
+        <div id="corrections-list"></div>
+      </div>
+    </section>
+
+    <section id="history-section" class="hidden">
+      <h2>Session History</h2>
+      <div id="history-list"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
