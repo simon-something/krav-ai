@@ -8,7 +8,7 @@ import httpx
 from backend.prompts.claude_system import TECHNIQUE_RUBRIC, get_claude_prompt
 
 _OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
-_DEFAULT_MODEL = "anthropic/claude-sonnet-4"
+_DEFAULT_MODEL = "anthropic/claude-sonnet-4.6"
 
 
 class ClaudeCoach:
