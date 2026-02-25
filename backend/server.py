@@ -16,7 +16,7 @@ from backend.video_processor import extract_frames, get_video_duration
 
 load_dotenv()
 
-VALID_STRIKE_TYPES = {"jab", "cross", "jab_cross"}
+VALID_STRIKE_TYPES = {"jab", "cross", "jab_cross", "hook", "uppercut", "elbow", "hammer_fist", "knee"}
 REFERENCES_DIR = os.path.join(os.path.dirname(__file__), "knowledge", "references")
 
 app = FastAPI(title="Krav AI")

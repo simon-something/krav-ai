@@ -45,11 +45,50 @@ TECHNIQUE_RUBRIC = """## Krav Maga Striking Technique Rubric
 30. **Stance recovery**: Stance remains stable between strikes; feet do not drift or cross.
 31. **Rhythm**: Natural 1-2 rhythm; the cross follows the jab without excessive delay or rushing.
 
+### Hook Mechanics (6 checkpoints)
+32. **Arm angle**: Arm bent at approximately 90 degrees at the elbow throughout the hook.
+33. **Fist orientation**: Thumb up (vertical fist) or horizontal fist depending on hook type; wrist stays straight.
+34. **Hip rotation**: Full hip rotation drives the hook — power comes from the core, not the arm.
+35. **Elbow height**: Elbow rises to shoulder height, forming a horizontal plane with the forearm.
+36. **Short arc**: Hook travels in a tight, compact arc — no wide, looping swing.
+37. **Pivot foot**: Lead foot (lead hook) or rear foot (rear hook) pivots to enable hip rotation.
+
+### Uppercut Mechanics (6 checkpoints)
+38. **Close range**: Uppercut is thrown at close range; not reaching or lunging to land it.
+39. **Hand path**: Slight hand drop then upward drive along the centerline toward the target.
+40. **Palm rotation**: Palm faces toward self during the upward drive; fist rotates naturally.
+41. **Leg and hip power**: Power generated from legs straightening and hips thrusting upward — not arm alone.
+42. **Shoulder cover**: Striking-side shoulder rises to protect the chin during the uppercut.
+43. **Guard maintained**: Non-striking hand stays at cheekbone level throughout; does not drop or flare.
+
+### Elbow Strike Mechanics (6 checkpoints)
+44. **Tight arm fold**: Arm is tightly folded so the elbow tip is the primary point of contact.
+45. **Elbow tip contact**: Strike lands with the hard point of the elbow, not the forearm.
+46. **Full hip rotation**: Hips rotate fully to generate power through the elbow strike.
+47. **Guard with non-striking hand**: Non-striking hand remains up protecting the face throughout.
+48. **Strike angles**: Practitioner demonstrates appropriate angle — horizontal, vertical, diagonal, or backward elbow.
+49. **Follow-through and recovery**: Elbow drives through the target and arm rechambered to guard quickly.
+
+### Hammer Fist Mechanics (5 checkpoints)
+50. **Bottom-of-fist contact**: Strike lands with the bottom (pinky side) of a closed fist.
+51. **Straight wrist**: Wrist stays straight and aligned with the forearm at impact — no bending or cocking.
+52. **Body weight commitment**: Full body weight drives down or forward into the strike for maximum force.
+53. **Hip involvement**: Hips rotate or thrust to add power; strike is not arm-only.
+54. **Arc direction**: Strike follows appropriate arc — downward, diagonal, or horizontal — matching the target.
+
+### Knee Strike Mechanics (6 checkpoints)
+55. **Hip thrust**: Hips drive forward aggressively, projecting the knee into the target.
+56. **Knee variations**: Practitioner uses appropriate variation — straight knee, round knee, or clinch knee.
+57. **Standing leg balance**: Standing leg remains firmly planted with slight knee bend for stability.
+58. **Upper body control**: Hands pull or control the target (e.g., clinch pull) to drive into the knee.
+59. **Rechamber**: Knee is rechambered after the strike, returning to a stable fighting stance.
+60. **No lean back**: Upper body stays upright or drives forward — does not lean backward during the knee.
+
 ### Footwork & Recovery (4 checkpoints)
-32. **No overcommitment**: Striker does not lunge or fall forward past their base during strikes.
-33. **Return to stance**: After striking, returns to proper fighting stance (width, stagger, balance).
-34. **Balance**: Center of gravity stays over the base throughout; no stumbling or excessive leaning.
-35. **Feet not crossed**: Feet never cross over each other during movement or striking.
+61. **No overcommitment**: Striker does not lunge or fall forward past their base during strikes.
+62. **Return to stance**: After striking, returns to proper fighting stance (width, stagger, balance).
+63. **Balance**: Center of gravity stays over the base throughout; no stumbling or excessive leaning.
+64. **Feet not crossed**: Feet never cross over each other during movement or striking.
 
 ### Common Errors to Watch For
 - **Dropping guard**: Non-punching hand drops below chin level during strikes.

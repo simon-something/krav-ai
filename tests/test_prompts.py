@@ -26,6 +26,7 @@ def test_observation_schema_has_required_fields():
     assert "non_striking_hand" in OBSERVATION_SCHEMA
     assert "telegraphing" in OBSERVATION_SCHEMA
     assert "combination_flow" in OBSERVATION_SCHEMA
+    assert "close_range_mechanics" in OBSERVATION_SCHEMA
 
 
 # --- Claude prompt tests ---
@@ -58,3 +59,8 @@ def test_technique_rubric_covers_all_categories():
     assert "footwork" in rubric_lower
     assert "common errors" in rubric_lower
     assert "combination" in rubric_lower
+    assert "hook" in rubric_lower
+    assert "uppercut" in rubric_lower
+    assert "elbow" in rubric_lower
+    assert "hammer fist" in rubric_lower
+    assert "knee" in rubric_lower

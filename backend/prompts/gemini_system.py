@@ -34,6 +34,11 @@ OBSERVATION_SCHEMA = {
             "retraction_speed_vs_extension",
             "full_extension_achieved",
             "elbow_position_during_strike",
+            "arm_angle_at_impact",
+            "strike_arc_path",
+            "vertical_drive",
+            "point_of_contact",
+            "clinch_control",
         ],
     },
     "non_striking_hand": {
@@ -69,6 +74,17 @@ OBSERVATION_SCHEMA = {
             "pause_between_strikes",
             "guard_during_transition",
             "rhythm",
+        ],
+    },
+    "close_range_mechanics": {
+        "description": "Observations specific to close-range strikes (hooks, uppercuts, elbows, knees)",
+        "fields": [
+            "arm_fold_tightness",
+            "elbow_height_relative_to_shoulder",
+            "upward_drive_from_legs",
+            "hip_thrust_forward",
+            "standing_leg_balance",
+            "rechamber_to_guard",
         ],
     },
 }
@@ -114,6 +130,7 @@ Observe the practitioner's body mechanics in detail. Be FACTUAL and SPECIFIC —
 ## Important Notes
 
 - If this is a single strike (jab or cross), skip the combination_flow category.
+- For close-range strikes (hook, uppercut, elbow, hammer_fist, knee), also fill in the close_range_mechanics category. For jab/cross/jab_cross, skip close_range_mechanics.
 - For each field, describe what you actually observe. Use phrases like "approximately 45 degrees", "hand drops to chin level", "slight hip rotation ~20 degrees".
 - Note the TIMING of movements — what happens first, what happens simultaneously, what is delayed.
 - If you cannot clearly observe something (e.g., occluded by angle), say "not clearly visible" for that field.

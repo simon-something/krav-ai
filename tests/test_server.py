@@ -25,11 +25,11 @@ def test_analyze_rejects_missing_video():
 def test_analyze_rejects_invalid_strike_type():
     response = client.post(
         "/api/analyze",
-        data={"strike_type": "uppercut"},
+        data={"strike_type": "roundhouse"},
         files={"video": ("test.webm", b"fake_video_data", "video/webm")},
     )
     assert response.status_code == 400
-    assert "uppercut" in response.json()["detail"]
+    assert "roundhouse" in response.json()["detail"]
 
 
 @patch("backend.server.rag_engine")
