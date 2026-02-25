@@ -1,0 +1,10 @@
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-dotenv==1.0.1
+python-multipart==0.0.20
+opencv-python-headless==4.11.0.86
+anthropic==0.43.0
+httpx==0.28.1
+chromadb==0.6.3
+sentence-transformers==3.4.1
+pytest==8.3.4

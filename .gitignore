@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.env
+backend/knowledge/chromadb/
+venv/
+.venv/
+node_modules/
+*.webm
+*.mp4
+tests/fixtures/
