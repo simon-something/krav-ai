@@ -15,3 +15,6 @@ dependencies = [
     "sentence-transformers>=5.2.3",
     "uvicorn[standard]>=0.41.0",
 ]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
