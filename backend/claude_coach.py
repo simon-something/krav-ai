@@ -1,18 +1,21 @@
-"""Claude coaching module for structured technique feedback."""
+"""Claude coaching module for structured technique feedback via OpenRouter."""
 
 import json
 import re
 
-import anthropic
+import httpx
 
 from backend.prompts.claude_system import TECHNIQUE_RUBRIC, get_claude_prompt
+
+_OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
+_DEFAULT_MODEL = "anthropic/claude-sonnet-4"
 
 
 class ClaudeCoach:
     def __init__(
-        self, api_key: str, model: str = "claude-sonnet-4-20250514"
+        self, api_key: str, model: str = _DEFAULT_MODEL
     ) -> None:
-        self._client = anthropic.Anthropic(api_key=api_key)
+        self._api_key = api_key
         self._model = model
 
     def _build_prompt(
@@ -42,7 +45,7 @@ class ClaudeCoach:
         rag_chunks: list[dict],
         session_history: list[dict],
     ) -> dict:
-        """Get structured coaching feedback from Claude.
+        """Get structured coaching feedback from Claude via OpenRouter.
 
         Args:
             strike_type: One of "jab", "cross", or "jab_cross".
@@ -60,20 +63,36 @@ class ClaudeCoach:
             strike_type, observations, rag_chunks, session_history
         )
 
+        payload = {
+            "model": self._model,
+            "messages": [
+                {"role": "system", "content": TECHNIQUE_RUBRIC},
+                {"role": "user", "content": user_message},
+            ],
+            "max_tokens": 2048,
+        }
+        headers = {
+            "Authorization": f"Bearer {self._api_key}",
+            "Content-Type": "application/json",
+        }
+
         last_error: Exception | None = None
 
         for _attempt in range(2):
             try:
-                response = self._client.messages.create(
-                    model=self._model,
-                    max_tokens=2048,
-                    system=TECHNIQUE_RUBRIC,
-                    messages=[{"role": "user", "content": user_message}],
-                )
-                text = response.content[0].text
+                with httpx.Client(timeout=60.0) as client:
+                    response = client.post(
+                        _OPENROUTER_URL,
+                        json=payload,
+                        headers=headers,
+                    )
+                    response.raise_for_status()
+
+                data = response.json()
+                text = data["choices"][0]["message"]["content"]
                 return self._parse_json_response(text)
 
-            except (anthropic.APIError, json.JSONDecodeError, KeyError) as exc:
+            except (httpx.HTTPStatusError, json.JSONDecodeError, KeyError) as exc:
                 last_error = exc
 
         raise RuntimeError(

@@ -31,8 +31,9 @@ app.add_middleware(
 
 # --- Service initialization ---
 
-gemini_analyzer = GeminiAnalyzer(api_key=os.getenv("OPENROUTER_API_KEY", ""))
-claude_coach = ClaudeCoach(api_key=os.getenv("ANTHROPIC_API_KEY", ""))
+_openrouter_key = os.getenv("OPENROUTER_API_KEY", "")
+gemini_analyzer = GeminiAnalyzer(api_key=_openrouter_key)
+claude_coach = ClaudeCoach(api_key=_openrouter_key)
 rag_engine = RAGEngine()
 
 session_history: list[dict] = []

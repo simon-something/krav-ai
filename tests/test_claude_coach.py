@@ -3,7 +3,7 @@
 import json
 from unittest.mock import MagicMock, patch
 
-import anthropic
+import httpx
 import pytest
 
 from backend.claude_coach import ClaudeCoach
@@ -24,8 +24,7 @@ MOCK_COACHING = {
 
 @pytest.fixture
 def coach():
-    with patch("backend.claude_coach.anthropic.Anthropic"):
-        return ClaudeCoach(api_key="test_key")
+    return ClaudeCoach(api_key="test_key")
 
 
 def test_build_prompt_includes_observations(coach):
@@ -41,11 +40,21 @@ def test_build_prompt_includes_rag(coach):
 
 
 def test_coach_returns_structured_feedback(coach):
-    mock_msg = MagicMock()
-    mock_msg.content = [MagicMock(text=json.dumps(MOCK_COACHING))]
-    coach._client.messages.create.return_value = mock_msg
+    mock_response = MagicMock()
+    mock_response.status_code = 200
+    mock_response.raise_for_status = MagicMock()
+    mock_response.json.return_value = {
+        "choices": [{"message": {"content": json.dumps(MOCK_COACHING)}}]
+    }
 
-    result = coach.get_feedback("jab", {}, [], [])
+    mock_client = MagicMock()
+    mock_client.post.return_value = mock_response
+
+    with patch("backend.claude_coach.httpx.Client") as mock_client_cls:
+        mock_client_cls.return_value.__enter__ = MagicMock(return_value=mock_client)
+        mock_client_cls.return_value.__exit__ = MagicMock(return_value=False)
+
+        result = coach.get_feedback("jab", {}, [], [])
 
     assert result["summary"] == "Solid jab foundation, focus on guard retention"
     assert "Good stance width" in result["positives"]
@@ -54,16 +63,26 @@ def test_coach_returns_structured_feedback(coach):
 
 
 def test_coach_retries_on_failure(coach):
-    # First call raises API error, second succeeds
     mock_success = MagicMock()
-    mock_success.content = [MagicMock(text=json.dumps(MOCK_COACHING))]
+    mock_success.status_code = 200
+    mock_success.raise_for_status = MagicMock()
+    mock_success.json.return_value = {
+        "choices": [{"message": {"content": json.dumps(MOCK_COACHING)}}]
+    }
 
-    coach._client.messages.create.side_effect = [
-        anthropic.APIConnectionError(request=MagicMock()),
-        mock_success,
-    ]
+    mock_fail = MagicMock()
+    mock_fail.raise_for_status.side_effect = httpx.HTTPStatusError(
+        "Server Error", request=MagicMock(), response=MagicMock(status_code=500)
+    )
 
-    result = coach.get_feedback("jab", {}, [], [])
+    mock_client = MagicMock()
+    mock_client.post.side_effect = [mock_fail, mock_success]
+
+    with patch("backend.claude_coach.httpx.Client") as mock_client_cls:
+        mock_client_cls.return_value.__enter__ = MagicMock(return_value=mock_client)
+        mock_client_cls.return_value.__exit__ = MagicMock(return_value=False)
+
+        result = coach.get_feedback("jab", {}, [], [])
 
     assert result["summary"] == "Solid jab foundation, focus on guard retention"
-    assert coach._client.messages.create.call_count == 2
+    assert mock_client.post.call_count == 2
